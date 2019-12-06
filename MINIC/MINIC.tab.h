@@ -74,7 +74,28 @@ namespace yy {
     {
       /* Tokens.  */
    enum yytokentype {
-
+     IDENTIFIER = 258,
+     NUMBER = 259,
+     RETURN = 260,
+     BREAK = 261,
+     IF = 262,
+     ELSE = 263,
+     WHILE = 264,
+     FUNCTION = 265,
+     IFPREC = 266,
+     OR = 267,
+     AND = 268,
+     NEQUAL = 269,
+     EQUAL = 270,
+     LT = 271,
+     LTE = 272,
+     GT = 273,
+     GTE = 274,
+     MINUS = 275,
+     PLUS = 276,
+     DIV = 277,
+     MULT = 278,
+     NOT = 279
    };
 
     };
@@ -160,7 +181,7 @@ namespace yy {
     typedef unsigned char token_number_type;
     /* Tables.  */
     /// For a state, the index in \a yytable_ of its portion.
-    static const signed char yypact_[];
+    static const short int yypact_[];
     static const signed char yypact_ninf_;
 
     /// For a state, default reduction number.
@@ -176,10 +197,10 @@ namespace yy {
     /// - if positive, shift that token.
     /// - if negative, reduce the rule which number is the opposite.
     /// - if zero, do what YYDEFACT says.
-    static const unsigned char yytable_[];
+    static const signed char yytable_[];
     static const signed char yytable_ninf_;
 
-    static const unsigned char yycheck_[];
+    static const signed char yycheck_[];
 
     /// For a state, its accessing symbol.
     static const unsigned char yystos_[];
@@ -250,7 +271,7 @@ namespace yy {
 
 } // yy
 /* Line 33 of lalr1.cc  */
-#line 254 "MINIC.tab.h"
+#line 275 "MINIC.tab.h"
 
 
 
