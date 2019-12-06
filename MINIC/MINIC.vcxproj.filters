@@ -52,4 +52,7 @@
   <ItemGroup>
     <None Include="MINIC.output" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
+  </ItemGroup>
 </Project>
