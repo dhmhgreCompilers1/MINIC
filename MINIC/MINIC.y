@@ -5,10 +5,18 @@
 #include "MINIC.tab.h"
 
 using namespace std;
-extern int yylex(yy::parser::semantic_type *yylval);
+extern int yylex(yy::parser::semantic_type *yylval ,yy::parser::location_type *yylloc);
 extern FILE *yyin;
+
 %}
 %verbose
+%locations
+
+%initial-action {
+// Filename for locations here
+@$.begin.filename = @$.end.filename = new std::string("test.txt");
+}
+
 %error-verbose
 
 %start compile_unit
@@ -24,10 +32,10 @@ extern FILE *yyin;
 %nonassoc NOT ELSE
 %%
 
-compile_unit: statement ';'
-			| compile_unit statement ';'
-			| function_definition ';'
-			| compile_unit function_definition ';'
+compile_unit: statement 
+			| compile_unit statement 
+			| function_definition 
+			| compile_unit function_definition 
 			;
 
 function_definition : FUNCTION IDENTIFIER '(' fargs ')' compound_statement

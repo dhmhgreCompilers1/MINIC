@@ -4,11 +4,19 @@
 #include <iostream>
 #include <cstdlib>
 #include "MINIC.tab.h"
-#define YY_DECL int yylex(yy::parser::semantic_type *yylval)
+#define YY_DECL int yylex(yy::parser::semantic_type *yylval ,yy::parser::location_type *yylloc)
 typedef yy::parser::token token;
+// make location include the current token
+# define YY_USER_ACTION yylloc->columns(yyleng);
 %}
 INT "0"|[1-9][0-9]*
 %%
+%{
+// start where previous token ended
+yylloc->step ();
+%}
+
+
 "if"			{ return token::IF;}
 "else"			{ return token::ELSE; }
 "return"		{ return token::RETURN; }
@@ -40,6 +48,6 @@ INT "0"|[1-9][0-9]*
 {INT}								{return token::NUMBER; }
 [a-zA-Z_][a-zA-Z0-9_]*				{return token::IDENTIFIER; }
 
-[ \n\r\t]
-
+[ \t]									{ yylloc->step (); }
+[\r\n]									{ yylloc->lines(1);}
 %%
