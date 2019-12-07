@@ -150,12 +150,14 @@
     <Flex Include="MINIC.l" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Composite.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="MINIC.tab.h" />
     <ClInclude Include="position.hh" />
     <ClInclude Include="stack.hh" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Composite.cpp" />
     <ClCompile Include="MINIC.flex.cpp" />
     <ClCompile Include="MINIC.tab.cpp" />
     <ClCompile Include="main.cpp" />
