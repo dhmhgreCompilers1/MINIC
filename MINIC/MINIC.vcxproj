@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Composite.h" />
+    <ClInclude Include="CompositeConcrete.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="MINIC.tab.h" />
     <ClInclude Include="position.hh" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Composite.cpp" />
+    <ClCompile Include="CompositeConcrete.cpp" />
     <ClCompile Include="MINIC.flex.cpp" />
     <ClCompile Include="MINIC.tab.cpp" />
     <ClCompile Include="main.cpp" />

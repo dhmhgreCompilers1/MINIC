@@ -39,6 +39,7 @@ compile_unit: statement
 			;
 
 function_definition : FUNCTION IDENTIFIER '(' fargs ')' compound_statement
+				|	  FUNCTION IDENTIFIER '('  ')' compound_statement
 				;
 
 fargs : IDENTIFIER
