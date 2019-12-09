@@ -57,6 +57,10 @@ class CBreakStatement : public CStatement {
 public:
 	CBreakStatement();
 };
+class CNullStatement : public CStatement {
+public:
+	CNullStatement();
+};
 class CStatementList : public CSTNode {
 public:
 	CStatementList(CSTNode* arg1);
@@ -66,14 +70,15 @@ class CExpression : public CSTNode {
 public:
 	CExpression(NodeType tp, int children, CSTNode* arg1, CSTNode* arg2);
 	CExpression(NodeType tp, int children, CSTNode* arg1);
+	CExpression(NodeType tp);
 };
 class CExpressionNUMBER : public CExpression {
 public:
-	CExpressionNUMBER(CSTNode* num);
+	CExpressionNUMBER(const char *text, double value);
 };
 class CExpressionIDENTIFIER : public CExpression {
 public:
-	CExpressionIDENTIFIER(CSTNode* id);
+	CExpressionIDENTIFIER(const char *text);
 };
 class CExpressionFCall : public CExpression {
 public:
@@ -96,9 +101,9 @@ class CExpressionDiv : public CExpression {
 public:
 	CExpressionDiv(CSTNode* arg1, CSTNode* arg2);
 };
-class CExpressionUnaryPLus : public CExpression {
+class CExpressionUnaryPlus : public CExpression {
 public:
-	CExpressionUnaryPLus(CSTNode* arg1);
+	CExpressionUnaryPlus(CSTNode* arg1);
 };
 class CExpressionUnaryMinus : public CExpression {
 public:

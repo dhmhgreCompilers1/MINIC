@@ -20,12 +20,15 @@ CIfStatement::CIfStatement(CSTNode* cond, CSTNode* ifpath) :CStatement(NT_IFSTAT
 CWhileStatement::CWhileStatement(CSTNode* cond, CSTNode* body) :CStatement(NT_WHILESTATEMENT,2,cond,body) {}
 CReturnStatement::CReturnStatement(CSTNode* expr) :CStatement(NT_RETURNSTATEMENT,1,expr) {}
 CBreakStatement::CBreakStatement() :CStatement(NT_BREAKSTATEMENT,0) {}
+CNullStatement::CNullStatement() : CStatement(NT_EXPRESSION_NUMBER, 0) {}
 CStatementList::CStatementList(CSTNode* arg1, CSTNode* arg2) :CSTNode(NT_STATEMENTLIST,2,arg1,arg2){}
 CStatementList::CStatementList(CSTNode* arg1) : CSTNode(NT_STATEMENTLIST, 1, arg1) {}
 CExpression::CExpression(NodeType tp, int children, CSTNode* arg1, CSTNode* arg2) :CSTNode(tp,2,arg1,arg2) {}
 CExpression::CExpression(NodeType tp, int children, CSTNode* arg1) :CSTNode(tp,children,arg1){}
-CExpressionNUMBER::CExpressionNUMBER(CSTNode* num) :CExpression(NT_EXPRESSION_NUMBER,1,num){}
-CExpressionIDENTIFIER::CExpressionIDENTIFIER(CSTNode* id) : CExpression(NT_EXPRESSION_IDENTIFIER, 1, id) {}
+CExpression::CExpression(NodeType tp) : CSTNode(tp, 0) {}
+CExpressionNUMBER::CExpressionNUMBER(const char *text, double value) :CExpression(NT_EXPRESSION_NUMBER){}
+
+CExpressionIDENTIFIER::CExpressionIDENTIFIER(const char *text) : CExpression(NT_EXPRESSION_IDENTIFIER) {}
 CExpressionFCall::CExpressionFCall(CSTNode* id, CSTNode* actual) : CExpression(NT_EXPRESSION_FCALL, 2, id,actual) {}
 CExpressionFCall::CExpressionFCall(CSTNode* id) : CExpression(NT_EXPRESSION_FCALL, 1, id) {}
 
@@ -33,7 +36,7 @@ CExpressionAdd::CExpressionAdd(CSTNode* arg1, CSTNode* arg2) : CExpression(NT_EX
 CExpressionMinus::CExpressionMinus(CSTNode* arg1, CSTNode* arg2) : CExpression(NT_EXPRESSION_MINUS, 2, arg1, arg2) {}
 CExpressionMult::CExpressionMult(CSTNode* arg1, CSTNode* arg2) : CExpression(NT_EXPRESSION_MULT, 2, arg1, arg2) {}
 CExpressionDiv::CExpressionDiv(CSTNode* arg1, CSTNode* arg2) : CExpression(NT_EXPRESSION_DIV, 2, arg1, arg2) {}
-CExpressionUnaryPLus::CExpressionUnaryPLus(CSTNode* arg1) : CExpression(NT_EXPRESSION_UNARYPLUS, 1, arg1) {}
+CExpressionUnaryPlus::CExpressionUnaryPlus(CSTNode* arg1) : CExpression(NT_EXPRESSION_UNARYPLUS, 1, arg1) {}
 CExpressionUnaryMinus::CExpressionUnaryMinus(CSTNode* arg1) : CExpression(NT_EXPRESSION_UNARYMINUS, 1, arg1) {}
 CExpressionAssign::CExpressionAssign(CSTNode* id, CSTNode* expr) : CExpression(NT_EXPRESSION_ASSIGN, 2, id, expr) {}
 CExpressionAND::CExpressionAND(CSTNode* arg1, CSTNode* arg2) : CExpression(NT_EXPRESSION_AND, 2, arg1, arg2) {}

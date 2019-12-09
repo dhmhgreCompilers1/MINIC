@@ -156,6 +156,7 @@
     <ClInclude Include="MINIC.tab.h" />
     <ClInclude Include="position.hh" />
     <ClInclude Include="stack.hh" />
+    <ClInclude Include="SymbolTable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Composite.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="MINIC.flex.cpp" />
     <ClCompile Include="MINIC.tab.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SymbolTable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MINIC.output" />

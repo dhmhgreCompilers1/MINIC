@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "MINIC.tab.h"
 #include "CompositeConcrete.h"
+#include "SymbolTable.h"
 #define YY_DECL int yylex(yy::parser::semantic_type *yylval ,yy::parser::location_type *yylloc)
 typedef yy::parser::token token;
 // make location include the current token
@@ -45,9 +46,12 @@ yylloc->step ();
 "!="			{ return token::NEQUAL;}
 "="				{ return '=';}
 
-({INT}?\.{INT})|({INT}\.{INT}?)		{return token::NUMBER; }
-{INT}								{return token::NUMBER; }
-[a-zA-Z_][a-zA-Z0-9_]*				{return token::IDENTIFIER; }
+({INT}?\.{INT})|({INT}\.{INT}?)		{	yylval->node = new CExpressionNUMBER(yytext,atof(yytext));
+										return token::NUMBER; }
+{INT}								{   yylval->node = new CExpressionNUMBER(yytext,(double)atoi(yytext));
+										return token::NUMBER; }
+[a-zA-Z_][a-zA-Z0-9_]*				{   yylval->node = g_symbolTable.GetSymbol(yytext);
+										return token::IDENTIFIER; }
 
 [ \t]									{ yylloc->step (); }
 [\r\n]									{ yylloc->lines(1);}

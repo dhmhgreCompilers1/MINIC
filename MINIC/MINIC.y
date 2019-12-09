@@ -42,66 +42,67 @@ extern FILE *yyin;
 %type <node> compile_unit function_definition fargs statement if_statement while_statement compound_statement statement_list expression args
 %%
 
-compile_unit: statement 
-			| compile_unit statement 
-			| function_definition 
-			| compile_unit function_definition 
+compile_unit: statement							{ $$=g_root= new CCompileUnit($1);}
+			| compile_unit statement			{ $$=g_root= new CCompileUnit($1,$2);}
+			| function_definition				{ $$=g_root= new CCompileUnit($1);}
+			| compile_unit function_definition  { $$=g_root= new CCompileUnit($1,$2);}
 			;
 
-function_definition : FUNCTION IDENTIFIER '(' fargs ')' compound_statement
-				|	  FUNCTION IDENTIFIER '('  ')' compound_statement
+function_definition : FUNCTION IDENTIFIER '(' fargs ')' compound_statement { $$ = new CFunctionDefinition($2,$4,$6); }
+				|	  FUNCTION IDENTIFIER '('  ')' compound_statement  { $$ = new CFunctionDefinition($2,$5); }
 				;
 
-fargs : IDENTIFIER
-		| fargs IDENTIFIER
+fargs :   IDENTIFIER		{ $$ = new CFormalArgs($1); }
+		| fargs IDENTIFIER  { $$ = new CFormalArgs($1,$2); }
 		;
 
-statement : expression ';'
-		  | compound_statement
-		  | if_statement
-		  | while_statement
-		  | RETURN expression ';'
-		  | BREAK ';'
-		  | ';'
+statement : expression ';'			{ $$ = new CExpressionStatement($1) ;}
+		  | compound_statement		
+		  | if_statement			
+		  | while_statement			
+		  | RETURN expression ';'	{ $$ = new CReturnStatement($2) ;}
+		  | BREAK ';'				{ $$ = new CBreakStatement() ;}
+		  | ';'						{ $$ = new CNullStatement() ;}
 
-if_statement : IF '(' expression ')' statement %prec IFPREC
-			| IF '(' expression ')' statement ELSE statement
+if_statement : IF '(' expression ')' statement %prec IFPREC   { $$ = new CIfStatement($3,$5) ;}
+			| IF '(' expression ')' statement ELSE statement  { $$ = new CIfStatement($3,$5,$7) ;}
 			;
 
-while_statement : WHILE '(' expression ')' statement
+while_statement : WHILE '(' expression ')' statement  { $$ = new CWhileStatement($3,$5) ;}
 			;
 
-compound_statement : '{' '}'
-					| '{' statement_list '}'
+compound_statement : '{' '}'					{ $$ = new CCompoundStatement() ;}
+					| '{' statement_list '}'    { $$ = new CCompoundStatement($2) ;}
 					;
-statement_list : statement
-			   | statement_list statement
+statement_list : statement					{ $$ = new CStatementList($1) ;}
+			   | statement_list statement	{ $$ = new CStatementList($1,$2) ;}
 			   ;
 
-expression: NUMBER
-		  | IDENTIFIER
-		  | IDENTIFIER '(' ')'
-		  | IDENTIFIER '(' args ')'
-		  | expression PLUS expression
-		  | expression MINUS expression
-		  | expression MULT expression
-		  | expression DIV expression
-		  | PLUS expression
-		  | MINUS expression
-		  | '(' expression ')'
-		  | IDENTIFIER '=' expression
-		  | expression AND expression
-		  | expression OR expression
-		  | NOT expression
-		  | expression GT expression
-		  | expression GTE expression
-		  | expression LT expression
-		  | expression LTE expression
-		  | expression EQUAL expression
-		  | expression NEQUAL expression
+expression: NUMBER							{ $$ = $1; }
+		  | IDENTIFIER						{ $$ = $1; }
+		  | IDENTIFIER '(' ')'				{ $$ = new CExpressionFCall($1); }
+		  | IDENTIFIER '(' args ')'			{ $$ = new CExpressionFCall($1,$3); }
+		  | expression PLUS expression		{ $$ = new CExpressionAdd($1,$3); }
+		  | expression MINUS expression		{ $$ = new CExpressionMinus($1,$3); }
+		  | expression MULT expression		{ $$ = new CExpressionMult($1,$3); }
+		  | expression DIV expression		{ $$ = new CExpressionDiv($1,$3); }
+		  | PLUS expression					{ $$ = new CExpressionUnaryPlus($2); }
+		  | MINUS expression				{ $$ = new CExpressionUnaryMinus($2); }
+		  | '(' expression ')'				{ $$ = $2;}
+		  | IDENTIFIER '=' expression		{ $$ = new CExpressionAssign($1,$3); }
+		  | expression AND expression		{ $$ = new CExpressionAND($1,$3); }
+		  | expression OR expression		{ $$ = new CExpressionOR($1,$3); }
+		  | NOT expression					{ $$ = new CExpressionNOT($2); }
+		  | expression GT expression		{ $$ = new CExpressionGT($1,$3); }
+		  | expression GTE expression		{ $$ = new CExpressionGTE($1,$3); }
+		  | expression LT expression		{ $$ = new CExpressionLT($1,$3); }
+		  | expression LTE expression		{ $$ = new CExpressionLTE($1,$3); }
+		  | expression EQUAL expression		{ $$ = new CExpressionEQUAL($1,$3); }
+		  | expression NEQUAL expression	{ $$ = new CExpressionNEQUAL($1,$3); }
 		  ;
-args : expression
-	 | args ',' expression
+
+args : expression							{ $$ = new CActualArgs($1); }	
+	 | args ',' expression					{ $$ = new CActualArgs($1,$3); }	
 	 ;
 %%
 
