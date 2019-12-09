@@ -37,6 +37,7 @@
 
 #include <iostream>
 #include "MINIC.tab.h"
+#include "CompositeConcrete.h"
 
 using namespace std;
 extern int yylex(yy::parser::semantic_type *yylval ,yy::parser::location_type *yylloc);
@@ -44,7 +45,7 @@ extern FILE *yyin;
 
 
 /* Line 279 of lalr1.cc  */
-#line 48 "MINIC.tab.cpp"
+#line 49 "MINIC.tab.cpp"
 
 
 #include "MINIC.tab.h"
@@ -52,7 +53,7 @@ extern FILE *yyin;
 /* User implementation prologue.  */
 
 /* Line 285 of lalr1.cc  */
-#line 56 "MINIC.tab.cpp"
+#line 57 "MINIC.tab.cpp"
 
 
 # ifndef YY_NULL
@@ -147,7 +148,7 @@ do {					\
 
 namespace yy {
 /* Line 353 of lalr1.cc  */
-#line 151 "MINIC.tab.cpp"
+#line 152 "MINIC.tab.cpp"
 
   /* Return YYSTR after stripping away unnecessary quotes and
      backslashes, so that it's suitable for yyerror.  The heuristic is
@@ -340,13 +341,13 @@ namespace yy {
 
 /* User initialization code.  */
 /* Line 545 of lalr1.cc  */
-#line 15 "MINIC.y"
+#line 16 "MINIC.y"
 {
 // Filename for locations here
 yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
 }
 /* Line 545 of lalr1.cc  */
-#line 350 "MINIC.tab.cpp"
+#line 351 "MINIC.tab.cpp"
 
     /* Initialize the stacks.  The initial state will be pushed in
        yynewstate, since the latter expects the semantical and the
@@ -466,7 +467,7 @@ yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
       {
         
 /* Line 670 of lalr1.cc  */
-#line 470 "MINIC.tab.cpp"
+#line 471 "MINIC.tab.cpp"
       default:
         break;
       }
@@ -993,11 +994,11 @@ yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
   const unsigned char
   parser::yyrline_[] =
   {
-         0,    35,    35,    36,    37,    38,    41,    42,    45,    46,
-      49,    50,    51,    52,    53,    54,    55,    57,    58,    61,
-      64,    65,    67,    68,    71,    72,    73,    74,    75,    76,
-      77,    78,    79,    80,    81,    82,    83,    84,    85,    86,
-      87,    88,    89,    90,    91,    93,    94
+         0,    45,    45,    46,    47,    48,    51,    52,    55,    56,
+      59,    60,    61,    62,    63,    64,    65,    67,    68,    71,
+      74,    75,    77,    78,    81,    82,    83,    84,    85,    86,
+      87,    88,    89,    90,    91,    92,    93,    94,    95,    96,
+      97,    98,    99,   100,   101,   103,   104
   };
 
   // Print the state stack on the debug stream.
@@ -1087,9 +1088,9 @@ yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
 
 } // yy
 /* Line 1141 of lalr1.cc  */
-#line 1091 "MINIC.tab.cpp"
+#line 1092 "MINIC.tab.cpp"
 /* Line 1142 of lalr1.cc  */
-#line 96 "MINIC.y"
+#line 106 "MINIC.y"
 
 
 namespace yy{

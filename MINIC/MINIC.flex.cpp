@@ -495,12 +495,13 @@ char *yytext;
 #include <iostream>
 #include <cstdlib>
 #include "MINIC.tab.h"
+#include "CompositeConcrete.h"
 #define YY_DECL int yylex(yy::parser::semantic_type *yylval ,yy::parser::location_type *yylloc)
 typedef yy::parser::token token;
 // make location include the current token
 # define YY_USER_ACTION yylloc->columns(yyleng);
-#line 502 "MINIC.flex.cpp"
 #line 503 "MINIC.flex.cpp"
+#line 504 "MINIC.flex.cpp"
 
 #define INITIAL 0
 
@@ -714,16 +715,16 @@ YY_DECL
 		}
 
 	{
-#line 13 "MINIC.l"
+#line 14 "MINIC.l"
 
 
-#line 16 "MINIC.l"
+#line 17 "MINIC.l"
 // start where previous token ended
 yylloc->step ();
 
 
 
-#line 726 "MINIC.flex.cpp"
+#line 727 "MINIC.flex.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -782,161 +783,161 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 21 "MINIC.l"
+#line 22 "MINIC.l"
 { return token::IF;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 22 "MINIC.l"
+#line 23 "MINIC.l"
 { return token::ELSE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 23 "MINIC.l"
+#line 24 "MINIC.l"
 { return token::RETURN; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 24 "MINIC.l"
+#line 25 "MINIC.l"
 { return token::BREAK; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 25 "MINIC.l"
+#line 26 "MINIC.l"
 { return token::WHILE; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 26 "MINIC.l"
+#line 27 "MINIC.l"
 { return token::FUNCTION; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 28 "MINIC.l"
+#line 29 "MINIC.l"
 { return '(';}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 29 "MINIC.l"
+#line 30 "MINIC.l"
 { return ')';}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 30 "MINIC.l"
+#line 31 "MINIC.l"
 { return '{';}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 31 "MINIC.l"
+#line 32 "MINIC.l"
 { return '}';}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 32 "MINIC.l"
+#line 33 "MINIC.l"
 { return ';';}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 33 "MINIC.l"
+#line 34 "MINIC.l"
 { return token::PLUS;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 34 "MINIC.l"
+#line 35 "MINIC.l"
 { return token::MINUS;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 35 "MINIC.l"
+#line 36 "MINIC.l"
 { return token::MULT;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 36 "MINIC.l"
+#line 37 "MINIC.l"
 { return token::DIV;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 37 "MINIC.l"
+#line 38 "MINIC.l"
 { return token::AND;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 38 "MINIC.l"
+#line 39 "MINIC.l"
 { return token::OR;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 39 "MINIC.l"
+#line 40 "MINIC.l"
 { return token::NOT;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 40 "MINIC.l"
+#line 41 "MINIC.l"
 { return token::LT;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 41 "MINIC.l"
+#line 42 "MINIC.l"
 { return token::GT;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 42 "MINIC.l"
+#line 43 "MINIC.l"
 { return token::GTE;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 43 "MINIC.l"
+#line 44 "MINIC.l"
 { return token::LTE;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 44 "MINIC.l"
+#line 45 "MINIC.l"
 { return token::EQUAL;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 45 "MINIC.l"
+#line 46 "MINIC.l"
 { return token::NEQUAL;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 46 "MINIC.l"
+#line 47 "MINIC.l"
 { return '=';}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 48 "MINIC.l"
+#line 49 "MINIC.l"
 {return token::NUMBER; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 49 "MINIC.l"
+#line 50 "MINIC.l"
 {return token::NUMBER; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 50 "MINIC.l"
+#line 51 "MINIC.l"
 {return token::IDENTIFIER; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 52 "MINIC.l"
+#line 53 "MINIC.l"
 { yylloc->step (); }
 	YY_BREAK
 case 30:
 /* rule 30 can match eol */
 YY_RULE_SETUP
-#line 53 "MINIC.l"
+#line 54 "MINIC.l"
 { yylloc->lines(1);}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 54 "MINIC.l"
+#line 55 "MINIC.l"
 ECHO;
 	YY_BREAK
-#line 939 "MINIC.flex.cpp"
+#line 940 "MINIC.flex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1941,5 +1942,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 54 "MINIC.l"
+#line 55 "MINIC.l"
 

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "MINIC.tab.h"
+#include "CompositeConcrete.h"
 #define YY_DECL int yylex(yy::parser::semantic_type *yylval ,yy::parser::location_type *yylloc)
 typedef yy::parser::token token;
 // make location include the current token

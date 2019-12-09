@@ -3,6 +3,7 @@
 %{
 #include <iostream>
 #include "MINIC.tab.h"
+#include "CompositeConcrete.h"
 
 using namespace std;
 extern int yylex(yy::parser::semantic_type *yylval ,yy::parser::location_type *yylloc);
@@ -19,8 +20,16 @@ extern FILE *yyin;
 
 %error-verbose
 
+%code requires{
+	#include "Composite.h"
+}
+
+%union{
+	CSTNode *node;
+}
+
 %start compile_unit
-%token IDENTIFIER NUMBER
+%token <node> IDENTIFIER NUMBER
 %token RETURN BREAK IF ELSE WHILE FUNCTION 
 %nonassoc IFPREC
 %left '='
@@ -30,6 +39,7 @@ extern FILE *yyin;
 %left PLUS MINUS
 %left MULT DIV
 %nonassoc NOT ELSE
+%type <node> compile_unit function_definition fargs statement if_statement while_statement compound_statement statement_list expression args
 %%
 
 compile_unit: statement 

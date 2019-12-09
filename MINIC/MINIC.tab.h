@@ -40,6 +40,15 @@
 #ifndef YY_YY_MINIC_TAB_H_INCLUDED
 # define YY_YY_MINIC_TAB_H_INCLUDED
 
+/* "%code requires" blocks.  */
+/* Line 33 of lalr1.cc  */
+#line 23 "MINIC.y"
+
+	#include "Composite.h"
+
+
+/* Line 33 of lalr1.cc  */
+#line 52 "MINIC.tab.h"
 
 
 #include <string>
@@ -55,7 +64,7 @@
 
 namespace yy {
 /* Line 33 of lalr1.cc  */
-#line 59 "MINIC.tab.h"
+#line 68 "MINIC.tab.h"
 
   /// A Bison parser.
   class parser
@@ -63,7 +72,17 @@ namespace yy {
   public:
     /// Symbol semantic values.
 #ifndef YYSTYPE
-    typedef int semantic_type;
+    union semantic_type
+    {
+/* Line 33 of lalr1.cc  */
+#line 27 "MINIC.y"
+
+	CSTNode *node;
+
+
+/* Line 33 of lalr1.cc  */
+#line 85 "MINIC.tab.h"
+    };
 #else
     typedef YYSTYPE semantic_type;
 #endif
@@ -271,7 +290,7 @@ namespace yy {
 
 } // yy
 /* Line 33 of lalr1.cc  */
-#line 275 "MINIC.tab.h"
+#line 294 "MINIC.tab.h"
 
 
 
