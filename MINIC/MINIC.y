@@ -32,65 +32,65 @@ extern FILE *yyin;
 %nonassoc NOT ELSE
 %%
 
-compile_unit: statement								// COMPILE_UNIT
-			| compile_unit statement				// COMPILE_UNIT
-			| function_definition					// COMPILE_UNIT
-			| compile_unit function_definition		// COMPILE_UNIT
+compile_unit: statement 
+			| compile_unit statement 
+			| function_definition 
+			| compile_unit function_definition 
 			;
 
-function_definition : FUNCTION IDENTIFIER '(' fargs ')' compound_statement   // FUNCTION_DEFINITION
+function_definition : FUNCTION IDENTIFIER '(' fargs ')' compound_statement
 				;
 
-fargs : IDENTIFIER				// FORMALARGS
-		| fargs IDENTIFIER	    // FORMALARGS
+fargs : IDENTIFIER
+		| fargs IDENTIFIER
 		;
 
-statement : expression ';'			// STATEMENT
-		  | compound_statement		// STATEMENT
-		  | if_statement			// STATEMENT
-		  | while_statement			// STATEMENT
-		  | RETURN expression ';'	// STATEMENT
-		  | BREAK ';'				// STATEMENT
-		  | ';'						// STATEMENT
+statement : expression ';'
+		  | compound_statement
+		  | if_statement
+		  | while_statement
+		  | RETURN expression ';'
+		  | BREAK ';'
+		  | ';'
 
-if_statement : IF '(' expression ')' statement %prec IFPREC		// IF_STATEMENT
-			| IF '(' expression ')' statement ELSE statement    // IFWITHELSE_STATEMENT
+if_statement : IF '(' expression ')' statement %prec IFPREC
+			| IF '(' expression ')' statement ELSE statement
 			;
 
-while_statement : WHILE '(' expression ')' statement	// WHILE_STATEMENT
+while_statement : WHILE '(' expression ')' statement
 			;
 
-compound_statement : '{' '}'					//COMPOUND_STATEMENT
-					| '{' statement_list '}'	//COMPOUND_STATEMENT
+compound_statement : '{' '}'
+					| '{' statement_list '}'
 					;
-statement_list : statement						// STATEMENT_LIST
-			   | statement_list statement		// STATEMENT_LIST
+statement_list : statement
+			   | statement_list statement
 			   ;
 
-expression: NUMBER								// EXPRESSION_NUMBER
-		  | IDENTIFIER							// EXPRESSION_IDENTIFIER
-		  | IDENTIFIER '(' ')'					// EXPRESSION_FCALL
-		  | IDENTIFIER '(' args ')'				// EXPRESSION_FCALL
-		  | expression PLUS expression			// EXPRESSION_ADD
-		  | expression MINUS expression			// EXPRESSION_MINUS
-		  | expression MULT expression			// EXPRESSION_MULT
-		  | expression DIV expression			// EXPRESSION_DIV
-		  | PLUS expression						// EXPRESSION_UNARYPLUS
-		  | MINUS expression					// EXPRESSION_UNARYMINUS
-		  | '(' expression ')'					// EXPRESSION_PAREN
-		  | IDENTIFIER '=' expression			// EXPRESSION_ASSIGN
-		  | expression AND expression			// EXPRESSION_AND
-		  | expression OR expression			// EXPRESSION_OR
-		  | NOT expression						// EXPRESSION_NOT
-		  | expression GT expression			// EXPRESSION_GT	
-		  | expression GTE expression			// EXPRESSION_GTE
-		  | expression LT expression			// EXPRESSION_LT
-		  | expression LTE expression			// EXPRESSION_LTE
-		  | expression EQUAL expression			// EXPRESSION_EQUAL
-		  | expression NEQUAL expression		// EXPRESSION_NEQUAL	
+expression: NUMBER
+		  | IDENTIFIER
+		  | IDENTIFIER '(' ')'
+		  | IDENTIFIER '(' args ')'
+		  | expression PLUS expression
+		  | expression MINUS expression
+		  | expression MULT expression
+		  | expression DIV expression
+		  | PLUS expression
+		  | MINUS expression
+		  | '(' expression ')'
+		  | IDENTIFIER '=' expression
+		  | expression AND expression
+		  | expression OR expression
+		  | NOT expression
+		  | expression GT expression
+		  | expression GTE expression
+		  | expression LT expression
+		  | expression LTE expression
+		  | expression EQUAL expression
+		  | expression NEQUAL expression
 		  ;
-args : expression				// ACTUALARGS
-	 | args ',' expression		// ACTUALARGS
+args : expression
+	 | args ',' expression
 	 ;
 %%
 
