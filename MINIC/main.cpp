@@ -13,4 +13,11 @@ void main(int argc, char** argv) {
 	p->parse();
 	cout << "Finished!!!";
 
+	dotfile = new ofstream("ST.dot", std::ofstream::out);
+	(*dotfile) << "digraph G{\n";
+	g_root->PrintSyntaxTree(dotfile, nullptr);
+	(*dotfile) << "}";
+	dotfile->close();
+
+	system("dot -Tgif ST.dot -o ST.gif");
 }

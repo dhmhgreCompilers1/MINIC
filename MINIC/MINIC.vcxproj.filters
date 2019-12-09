@@ -69,8 +69,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MINIC.output" />
+    <None Include="ST.dot" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ST.gif">
+      <Filter>Grammar Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

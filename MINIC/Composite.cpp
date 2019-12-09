@@ -52,4 +52,12 @@ CSTNode* CSTNode::GetChild(int index) {
 	return (*it);
 }
 
+void CSTNode::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	list<CSTNode*>::iterator it;
+	cout << "Visiting node " << m_graphvizLabel << std::endl;
+	for (it = m_children->begin(); it != m_children->end(); it++) {
+		(*it)->PrintSyntaxTree(dotfile,parent);
+	}
+}
+
 

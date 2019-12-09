@@ -30,7 +30,7 @@ public:
 	NodeType GetNodeType();
 	virtual string GetGraphVizLabel();
 	CSTNode* GetChild(int index);
-	
+	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent);
 
 	// ********** MODIFIER METHODS ***********
 

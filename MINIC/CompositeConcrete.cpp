@@ -48,3 +48,130 @@ CExpressionLT::CExpressionLT(CSTNode* arg1, CSTNode* arg2) : CExpression(NT_EXPR
 CExpressionLTE::CExpressionLTE(CSTNode* arg1, CSTNode* arg2) : CExpression(NT_EXPRESSION_LTE, 2, arg1, arg2) {}
 CExpressionEQUAL::CExpressionEQUAL(CSTNode* arg1, CSTNode* arg2) : CExpression(NT_EXPRESSION_EQUAL, 2, arg1, arg2) {}
 CExpressionNEQUAL::CExpressionNEQUAL(CSTNode* arg1, CSTNode* arg2) : CExpression(NT_EXPRESSION_NEQUAL, 2, arg1, arg2) {}
+
+void CCompileUnit::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	if (parent != nullptr) {
+		(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	}
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CFunctionDefinition::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CFormalArgs::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CActualArgs::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionStatement::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CCompoundStatement::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CIfStatement::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CWhileStatement::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CReturnStatement::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CBreakStatement::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CNullStatement::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CStatementList::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionNUMBER::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionIDENTIFIER::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionFCall::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionAdd::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionMinus::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionMult::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionDiv::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionUnaryPlus::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionUnaryMinus::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionAssign::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionAND::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionOR::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionNOT::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionGT::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionGTE::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionLT::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionLTE::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionEQUAL::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
+void CExpressionNEQUAL::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}

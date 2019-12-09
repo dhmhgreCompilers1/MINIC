@@ -168,9 +168,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MINIC.output" />
+    <None Include="ST.dot" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ST.gif" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
