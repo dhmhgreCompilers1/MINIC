@@ -141,42 +141,42 @@ public:
 	CExpressionAdd(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionAdd(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionMinus : public CExpression {
 public:
 	CExpressionMinus(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionMinus(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionMult : public CExpression {
 public:
 	CExpressionMult(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionMult(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionDiv : public CExpression {
 public:
 	CExpressionDiv(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionDiv(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionUnaryPlus : public CExpression {
 public:
 	CExpressionUnaryPlus(CSTNode* arg1);
 	virtual ~CExpressionUnaryPlus(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionUnaryMinus : public CExpression {
 public:
 	CExpressionUnaryMinus(CSTNode* arg1);
 	virtual ~CExpressionUnaryMinus(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionAssign : public CExpression {
 public:
@@ -211,42 +211,42 @@ public:
 	CExpressionGT(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionGT(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionGTE : public CExpression {
 public:
 	CExpressionGTE(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionGTE(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionLT : public CExpression {
 public:
 	CExpressionLT(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionLT() {}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionLTE : public CExpression {
 public:
 	CExpressionLTE(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionLTE() {}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionEQUAL : public CExpression {
 public:
 	CExpressionEQUAL(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionEQUAL() {}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionNEQUAL : public CExpression {
 public:
 	CExpressionNEQUAL(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionNEQUAL() {}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 
 

@@ -195,3 +195,47 @@ double CExpressionAssign::Evaluate(CSTNode* parent) {
 	cout << id->m_text << "=" << id->m_value << endl;
 	return id->m_value;
 }
+
+double CExpressionAdd::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) + GetChild(1)->Evaluate(this);
+}
+double CExpressionMinus::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) - GetChild(1)->Evaluate(this);
+}
+double CExpressionMult::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) * GetChild(1)->Evaluate(this);
+}
+double CExpressionDiv::Evaluate(CSTNode* parent) {
+	double denom = GetChild(1)->Evaluate(this);
+	if ( denom == 0) {
+		cout << "Division by zero" << endl;
+		exit(1);
+	}
+	else {
+		return GetChild(0)->Evaluate(this) / denom;
+	}	
+}
+double CExpressionUnaryPlus::Evaluate(CSTNode* parent) {
+	return +GetChild(0)->Evaluate(this);
+}
+double CExpressionUnaryMinus::Evaluate(CSTNode* parent) {
+	return -GetChild(0)->Evaluate(this);
+}
+double CExpressionGT::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) > GetChild(1)->Evaluate(this) ? 1 : 0;
+}
+double CExpressionGTE::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) >= GetChild(1)->Evaluate(this) ? 1 : 0;
+}
+double CExpressionLT::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) < GetChild(1)->Evaluate(this) ? 1 : 0;
+}
+double CExpressionLTE::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) <= GetChild(1)->Evaluate(this) ? 1 : 0;
+}
+double CExpressionEQUAL::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) == GetChild(1)->Evaluate(this) ? 1 : 0;
+}
+double CExpressionNEQUAL::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) != GetChild(1)->Evaluate(this) ? 1 : 0;
+}
