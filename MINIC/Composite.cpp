@@ -54,10 +54,20 @@ CSTNode* CSTNode::GetChild(int index) {
 
 void CSTNode::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
 	list<CSTNode*>::iterator it;
-	cout << "Visiting node " << m_graphvizLabel << std::endl;
 	for (it = m_children->begin(); it != m_children->end(); it++) {
 		(*it)->PrintSyntaxTree(dotfile,parent);
 	}
 }
 
+double CSTNode::AggregateResult(double result) {
+	return result;
+}
 
+double CSTNode::Evaluate(CSTNode* parent) {
+	list<CSTNode*>::iterator it;
+	double result;
+	for (it = m_children->begin(); it != m_children->end(); it++) {
+		result =  AggregateResult((*it)->Evaluate( parent));
+	}
+	return result;
+}

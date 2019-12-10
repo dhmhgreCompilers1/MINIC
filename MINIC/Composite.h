@@ -31,6 +31,8 @@ public:
 	virtual string GetGraphVizLabel();
 	CSTNode* GetChild(int index);
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent);
+	virtual double Evaluate(CSTNode* parent);
+	virtual double AggregateResult(double result);
 
 	// ********** MODIFIER METHODS ***********
 
