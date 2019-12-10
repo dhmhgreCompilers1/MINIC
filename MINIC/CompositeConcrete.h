@@ -49,7 +49,7 @@ public:
 	CExpressionStatement(CSTNode* arg);
 	virtual ~CExpressionStatement(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CCompoundStatement : public CStatement {
 public:

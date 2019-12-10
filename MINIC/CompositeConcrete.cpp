@@ -250,3 +250,13 @@ double CExpressionOR::Evaluate(CSTNode* parent) {
 double CExpressionNOT::Evaluate(CSTNode* parent) {
 	return !(GetChild(0)->Evaluate(this)) ;
 }
+
+
+double CExpressionStatement::Evaluate(CSTNode* parent) {
+	CExpression* child= (CExpression*)GetChild(0);
+	double result = child->Evaluate(this);
+	if (child->GetNodeType() != NT_EXPRESSION_ASSIGN) {
+		cout << ":" << result << endl;
+	}
+	return 0;
+}
