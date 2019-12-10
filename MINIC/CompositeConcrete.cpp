@@ -239,3 +239,14 @@ double CExpressionEQUAL::Evaluate(CSTNode* parent) {
 double CExpressionNEQUAL::Evaluate(CSTNode* parent) {
 	return GetChild(0)->Evaluate(this) != GetChild(1)->Evaluate(this) ? 1 : 0;
 }
+
+
+double CExpressionAND::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) && GetChild(1)->Evaluate(this);
+}
+double CExpressionOR::Evaluate(CSTNode* parent) {
+	return GetChild(0)->Evaluate(this) || GetChild(1)->Evaluate(this);
+}
+double CExpressionNOT::Evaluate(CSTNode* parent) {
+	return !(GetChild(0)->Evaluate(this)) ;
+}

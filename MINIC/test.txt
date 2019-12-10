@@ -1,1 +1,1 @@
-fact =1;foo =2;ff = fact < foo;ff = foo+ff+fact;
+fact =1;foo =2;zz = fact && foo;zz = !zz;

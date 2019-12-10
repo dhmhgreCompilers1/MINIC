@@ -190,21 +190,21 @@ public:
 	CExpressionAND(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionAND(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionOR : public CExpression {
 public:
 	CExpressionOR(CSTNode* arg1, CSTNode* arg2);
 	virtual ~CExpressionOR(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionNOT : public CExpression {
 public:
 	CExpressionNOT(CSTNode* expr);
 	virtual ~CExpressionNOT(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionGT : public CExpression {
 public:
