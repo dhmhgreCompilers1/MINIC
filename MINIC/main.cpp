@@ -20,4 +20,6 @@ void main(int argc, char** argv) {
 	dotfile->close();
 
 	system("dot -Tgif ST.dot -o ST.gif");
+
+	g_root->Evaluate(nullptr);
 }

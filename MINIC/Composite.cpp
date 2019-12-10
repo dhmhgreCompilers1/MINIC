@@ -65,7 +65,7 @@ double CSTNode::AggregateResult(double result) {
 
 double CSTNode::Evaluate(CSTNode* parent) {
 	list<CSTNode*>::iterator it;
-	double result;
+	double result=0;
 	for (it = m_children->begin(); it != m_children->end(); it++) {
 		result =  AggregateResult((*it)->Evaluate( parent));
 	}

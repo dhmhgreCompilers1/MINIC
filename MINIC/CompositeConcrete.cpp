@@ -26,7 +26,10 @@ CStatementList::CStatementList(CSTNode* arg1) : CSTNode(NT_STATEMENTLIST, 1, arg
 CExpression::CExpression(NodeType tp, int children, CSTNode* arg1, CSTNode* arg2) :CSTNode(tp,2,arg1,arg2) {}
 CExpression::CExpression(NodeType tp, int children, CSTNode* arg1) :CSTNode(tp,children,arg1){}
 CExpression::CExpression(NodeType tp) : CSTNode(tp, 0) {}
-CExpressionNUMBER::CExpressionNUMBER(const char *text, double value) :CExpression(NT_EXPRESSION_NUMBER){}
+CExpressionNUMBER::CExpressionNUMBER(const char *text, double value) :CExpression(NT_EXPRESSION_NUMBER) {
+	m_value = value;
+	m_text = string(text);
+}
 
 CExpressionIDENTIFIER::CExpressionIDENTIFIER(const char *text) : CExpression(NT_EXPRESSION_IDENTIFIER) {}
 CExpressionFCall::CExpressionFCall(CSTNode* id, CSTNode* actual) : CExpression(NT_EXPRESSION_FCALL, 2, id,actual) {}
@@ -175,3 +178,12 @@ void CExpressionNEQUAL::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
 	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
 	CSTNode::PrintSyntaxTree(dotfile, this);
 }
+
+
+
+
+double CExpressionNUMBER::Evaluate(CSTNode* parent) {
+	return m_value;
+}
+
+
