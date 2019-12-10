@@ -121,10 +121,12 @@ public:
 };
 class CExpressionIDENTIFIER : public CExpression {
 public:
+	string m_text;
+	double m_value;
 	CExpressionIDENTIFIER(const char *text);
 	virtual ~CExpressionIDENTIFIER(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionFCall : public CExpression {
 public:
@@ -181,7 +183,7 @@ public:
 	CExpressionAssign(CSTNode* id, CSTNode* expr);
 	virtual ~CExpressionAssign(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionAND : public CExpression {
 public:

@@ -30,8 +30,9 @@ CExpressionNUMBER::CExpressionNUMBER(const char *text, double value) :CExpressio
 	m_value = value;
 	m_text = string(text);
 }
-
-CExpressionIDENTIFIER::CExpressionIDENTIFIER(const char *text) : CExpression(NT_EXPRESSION_IDENTIFIER) {}
+CExpressionIDENTIFIER::CExpressionIDENTIFIER(const char *text) : CExpression(NT_EXPRESSION_IDENTIFIER) {
+	m_text = string(text);
+}
 CExpressionFCall::CExpressionFCall(CSTNode* id, CSTNode* actual) : CExpression(NT_EXPRESSION_FCALL, 2, id,actual) {}
 CExpressionFCall::CExpressionFCall(CSTNode* id) : CExpression(NT_EXPRESSION_FCALL, 1, id) {}
 
@@ -185,5 +186,12 @@ void CExpressionNEQUAL::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
 double CExpressionNUMBER::Evaluate(CSTNode* parent) {
 	return m_value;
 }
-
-
+double CExpressionIDENTIFIER::Evaluate(CSTNode* parent) {
+	return m_value;
+}
+double CExpressionAssign::Evaluate(CSTNode* parent) {
+	CExpressionIDENTIFIER *id = (CExpressionIDENTIFIER *)GetChild(0);
+	id->m_value = GetChild(1)->Evaluate(this);
+	cout << id->m_text << "=" << id->m_value << endl;
+	return id->m_value;
+}
