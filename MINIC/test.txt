@@ -1,1 +1,1 @@
-fact =1;while (fact<10){ fact = fact +1;}
+fact =1;while (fact<10){ if ( fact < 5)	fact = fact +1; else	fact = fact +2;}

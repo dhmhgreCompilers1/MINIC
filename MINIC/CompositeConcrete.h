@@ -64,7 +64,7 @@ public:
 	CIfStatement(CSTNode* cond, CSTNode* ifpath);
 	virtual ~CIfStatement(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CWhileStatement : public CStatement {
 public:	
