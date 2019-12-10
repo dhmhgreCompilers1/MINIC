@@ -260,3 +260,10 @@ double CExpressionStatement::Evaluate(CSTNode* parent) {
 	}
 	return 0;
 }
+
+double CWhileStatement::Evaluate(CSTNode* parent) {
+	while ( GetChild(0)->Evaluate(this) ) {
+		GetChild(1)->Evaluate(this);
+	}
+	return 0;
+}

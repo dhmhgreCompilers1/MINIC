@@ -1,1 +1,1 @@
-fact =1;foo =2;zz = fact && foo;zz = !zz;1+2*(3+5)/2;
+fact =1;while (fact<10){ fact = fact +1;}

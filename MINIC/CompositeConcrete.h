@@ -71,7 +71,7 @@ public:
 	CWhileStatement(CSTNode* cond, CSTNode* body);
 	virtual ~CWhileStatement(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CReturnStatement : public CStatement {
 public:
