@@ -3,6 +3,7 @@
 // initialize static variables
 CSTNode* g_root = NULL;
 int CSTNode::ms_serialCounter = 0;
+bool CSTNode::m_breakVisit = false;
 const char* g_nodeTypeLabels[] = {"COMPILEUNIT","FUNCTIONDEFINITION" ,"FORMALARGS" ,"ACTUALARGS","EXPRESSIONSTATEMENT",
 								  "COMPOUNDSTATEMENT", "IFSTATEMENT", "WHILESTATEMENT", "RETURNSTATEMENT","BREAKSTATEMENT",
 								  "NULLSTATEMENT",
@@ -68,6 +69,9 @@ double CSTNode::Evaluate(CSTNode* parent) {
 	double result=0;
 	for (it = m_children->begin(); it != m_children->end(); it++) {
 		result =  AggregateResult((*it)->Evaluate( parent));
+		if ( m_breakVisit ) {
+			break;
+		}
 	}
 	return result;
 }

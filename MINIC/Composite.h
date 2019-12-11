@@ -38,6 +38,8 @@ public:
 
 	
 protected:
+	static bool m_breakVisit;
+	
 	// Type of node
 	NodeType m_nodeType;
 	// A label that will be used to render the node in graphviz

@@ -263,6 +263,10 @@ double CExpressionStatement::Evaluate(CSTNode* parent) {
 double CWhileStatement::Evaluate(CSTNode* parent) {
 	while ( GetChild(0)->Evaluate(this) ) {
 		GetChild(1)->Evaluate(this);
+		if ( m_breakVisit ) {
+			m_breakVisit = false;
+			break;
+		}
 	}
 	return 0;
 }
@@ -274,4 +278,9 @@ double CIfStatement::Evaluate(CSTNode* parent) {
 		GetChild(2)->Evaluate(this);
 	}
 	return 0;
+}
+
+double CBreakStatement::Evaluate(CSTNode* parent) {
+	m_breakVisit = true;
+	return  0;
 }

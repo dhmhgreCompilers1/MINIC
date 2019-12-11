@@ -85,7 +85,7 @@ public:
 	CBreakStatement();
 	virtual ~CBreakStatement(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CNullStatement : public CStatement {
 public:
