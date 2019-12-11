@@ -31,6 +31,7 @@ yylloc->step ();
 "{"				{ return '{';}
 "}"				{ return '}';}
 ";"				{ return ';';}
+","				{ return ',';}
 "+"				{ return token::PLUS;}
 "-"				{ return token::MINUS;}
 "*"				{ return token::MULT;}

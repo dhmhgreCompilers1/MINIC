@@ -8,6 +8,7 @@
 using namespace std;
 
 class CSTNode;
+class CExpression;
 extern CSTNode* g_root;
 extern const char* g_nodeTypeLabels[];
 typedef enum nodeType {
@@ -35,7 +36,7 @@ public:
 	virtual double AggregateResult(double result);
 
 	// ********** MODIFIER METHODS ***********
-
+	friend void GetArguments(CSTNode* currentnode, list<CExpression*>* arguments);
 	
 protected:
 	static bool m_breakVisit;

@@ -29,11 +29,12 @@ public:
 };
 class CActualArgs : public CSTNode {
 public:
+		
 	CActualArgs(CSTNode* actargs, CSTNode* expr);
 	CActualArgs(CSTNode* expr);
 	virtual ~CActualArgs(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	void GetArguments(CSTNode *currentNode,list<CExpression*>* m_arguments);
 };
 class CStatement : public CSTNode {
 protected:
@@ -130,11 +131,13 @@ public:
 };
 class CExpressionFCall : public CExpression {
 public:
+	list<CExpression*>* m_arguments = nullptr;
 	CExpressionFCall(CSTNode* id, CSTNode* actual);
 	CExpressionFCall(CSTNode* id);
 	virtual ~CExpressionFCall(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
+	double GetArgument(int index);
 };
 class CExpressionAdd : public CExpression {
 public:

@@ -284,3 +284,46 @@ double CBreakStatement::Evaluate(CSTNode* parent) {
 	m_breakVisit = true;
 	return  0;
 }
+
+
+void GetArguments(CSTNode *currentnode,list<CExpression*>* arguments) {
+	static int discoveredArg=0;
+
+	list<CSTNode*>::iterator it;
+	double result = 0;
+			
+	if ( dynamic_cast<CExpression *>(currentnode)!=nullptr) {
+		arguments->push_back((CExpression *)currentnode);		
+	}
+	
+	for (it = currentnode->m_children->begin(); it != currentnode->m_children->end(); it++) {
+		GetArguments((*it), arguments);
+	}
+}
+
+double CExpressionFCall::GetArgument(int index) {
+	CActualArgs *aArgs = (CActualArgs*)GetChild(1);
+	list<CExpression*>::iterator it;
+	if ( m_arguments == nullptr) {
+		m_arguments = new list<CExpression*>();
+		GetArguments(aArgs,m_arguments);
+	}
+	it = m_arguments->begin();
+	advance(it, index);
+	return (*it)->Evaluate(this);
+}
+
+
+double CExpressionFCall::Evaluate(CSTNode* parent) {
+	double result = 0;
+	CExpressionIDENTIFIER* functionId = (CExpressionIDENTIFIER*)GetChild(0);
+
+	if ( !functionId->m_text.compare("sqrt") ) {
+		result = sqrt(GetArgument(0));
+	}
+	else if (!functionId->m_text.compare("pow")) {
+		result = pow(GetArgument(0), GetArgument(1));
+	}
+
+	return result;
+}
