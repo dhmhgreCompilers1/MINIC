@@ -281,12 +281,22 @@ double CWhileStatement::Evaluate(CSTNode* parent) {
 	return 0;
 }
 double CIfStatement::Evaluate(CSTNode* parent) {
-	if (GetChild(0)->Evaluate(this)) {
-		GetChild(1)->Evaluate(this);
-	}
-	else {
-		GetChild(2)->Evaluate(this);
-	}
+	switch (m_children->size()) {
+		case 2:
+			if (GetChild(0)->Evaluate(this)) {
+				GetChild(1)->Evaluate(this);
+			}
+			break;
+		case 3:
+			if (GetChild(0)->Evaluate(this)) {
+				GetChild(1)->Evaluate(this);
+			}
+			else {
+				GetChild(2)->Evaluate(this);
+			}
+			break;
+		default:;
+	}	
 	return 0;
 }
 

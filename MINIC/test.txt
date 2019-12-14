@@ -1,1 +1,1 @@
-function square(x,y) {i=0;fact = 0;while (i<y){ fact =fact +sqrt(x)+y; i=i+1;} return fact;}fact =square(4,2)+2;
+function square(x,y) {i=0;fact = 0;	if ( y == 0 ){		return 0;	}	while (i<y){		fact =fact +sqrt(x)+y;		i=i+1;	} return fact;}fact =square(4,2)+2;fact =square(4,0)+2;
