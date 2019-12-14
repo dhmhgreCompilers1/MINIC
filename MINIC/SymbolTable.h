@@ -1,25 +1,32 @@
 #ifndef SYMBOLTABLE_
 #define SYMBOLTABLE_
-
-#include "CompositeConcrete.h"
+#include <string>
 #include <map>
 #include <optional>
 using namespace std;
 
+class CIDENTIFIER;
+class CSTNode;
+class Symbol {
+public:
+	string m_text;
+	double value;
+	CIDENTIFIER* Idnode;
+	CSTNode* syntaxNode;
+};
+
 class SymbolTable {
-	map<string, CSTNode*>* m_symbolTable;
+	map<string, Symbol*>* m_symbolTable;
 public:
 	SymbolTable() {
-		m_symbolTable = new map<string, CSTNode*>();
+		m_symbolTable = new map<string, Symbol*>();
 	}
 	virtual ~SymbolTable() {}
 
-	CSTNode* GetSymbol(string);
+	Symbol * GetSymbol(string);	
 };
 
 extern SymbolTable g_symbolTable;
-
-
 
 #endif
 

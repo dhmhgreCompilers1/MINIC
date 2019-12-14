@@ -1,11 +1,12 @@
 #include "SymbolTable.h"
+#include "CompositeConcrete.h"
 SymbolTable g_symbolTable;
-CSTNode* SymbolTable::GetSymbol(string textKey) {
-	CSTNode* symbol;
-	map<string, CSTNode*>::iterator it;
+Symbol* SymbolTable::GetSymbol(string textKey) {
+	Symbol* symbol;
+	map<string, Symbol*>::iterator it;
 	it = m_symbolTable->find(textKey);
 	if (it == m_symbolTable->end()) {
-		symbol = new CExpressionIDENTIFIER(textKey.c_str());
+		symbol = new Symbol{ textKey,0,new CIDENTIFIER(textKey.c_str()) };
 		(*m_symbolTable)[textKey] = symbol;
 		return  symbol;
 	}

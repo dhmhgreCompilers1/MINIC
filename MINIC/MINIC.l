@@ -51,7 +51,7 @@ yylloc->step ();
 										return token::NUMBER; }
 {INT}								{   yylval->node = new CExpressionNUMBER(yytext,(double)atoi(yytext));
 										return token::NUMBER; }
-[a-zA-Z_][a-zA-Z0-9_]*				{   yylval->node = g_symbolTable.GetSymbol(yytext);
+[a-zA-Z_][a-zA-Z0-9_]*				{   yylval->node = g_symbolTable.GetSymbol(yytext)->Idnode;
 										return token::IDENTIFIER; }
 
 [ \t]									{ yylloc->step (); }

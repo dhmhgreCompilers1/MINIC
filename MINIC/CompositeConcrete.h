@@ -3,6 +3,7 @@
 #include "Composite.h"
 
 class CExpression;
+class CExpressionIdentifier;
 
 class CCompileUnit : public CSTNode {
 public:
@@ -17,12 +18,13 @@ public:
 	CFunctionDefinition(CSTNode* id, CSTNode* compoundst);
 	virtual ~CFunctionDefinition(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CFormalArgs : public CSTNode {
 public:
 	CFormalArgs(CSTNode* fargs, CSTNode* id);
 	CFormalArgs(CSTNode* id);
+	CFormalArgs();
 	virtual ~CFormalArgs(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
 	
@@ -34,7 +36,6 @@ public:
 	CActualArgs(CSTNode* expr);
 	virtual ~CActualArgs(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	void GetArguments(CSTNode *currentNode,list<CExpression*>* m_arguments);
 };
 class CStatement : public CSTNode {
 protected:
@@ -53,7 +54,7 @@ public:
 	double Evaluate(CSTNode* parent) override;
 };
 class CCompoundStatement : public CStatement {
-public:
+public:	
 	CCompoundStatement(CSTNode* arg = nullptr);
 	virtual ~CCompoundStatement(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
@@ -76,10 +77,11 @@ public:
 };
 class CReturnStatement : public CStatement {
 public:
+	CFunctionDefinition* m_hostFunction;
 	CReturnStatement(CSTNode* expr);
 	virtual ~CReturnStatement(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
-	
+	double Evaluate(CSTNode* parent) override;
 };
 class CBreakStatement : public CStatement {
 public:
@@ -120,24 +122,34 @@ public:
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
 	double Evaluate(CSTNode* parent) override;
 };
-class CExpressionIDENTIFIER : public CExpression {
+class CExpressionVariable : public CExpression {
+public:
+	string m_text;	
+	CExpressionVariable(CSTNode *id);
+	virtual ~CExpressionVariable(){}
+	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
+	double Evaluate(CSTNode* parent) override;
+};
+
+class CIDENTIFIER : public CSTNode {
 public:
 	string m_text;
-	double m_value;
-	CExpressionIDENTIFIER(const char *text);
-	virtual ~CExpressionIDENTIFIER(){}
-	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
+	CIDENTIFIER(const char* text);
+	virtual ~CIDENTIFIER();
+	virtual void PrintSyntaxTree(ofstream* dotfile, CSTNode* parent) override;
 	double Evaluate(CSTNode* parent) override;
 };
 class CExpressionFCall : public CExpression {
 public:
-	list<CExpression*>* m_arguments = nullptr;
+	list<CExpression*>* m_actualArguments = nullptr;
+	list<CIDENTIFIER*>* m_formalArguments = nullptr;
 	CExpressionFCall(CSTNode* id, CSTNode* actual);
 	CExpressionFCall(CSTNode* id);
 	virtual ~CExpressionFCall(){}
 	virtual void PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) override;
 	double Evaluate(CSTNode* parent) override;
-	double GetArgument(int index);
+	double GetActualArgument(int index);
+	void MapActualToFormalArguments();	
 };
 class CExpressionAdd : public CExpression {
 public:

@@ -927,7 +927,7 @@ YY_RULE_SETUP
 case 29:
 YY_RULE_SETUP
 #line 55 "MINIC.l"
-{   yylval->node = g_symbolTable.GetSymbol(yytext);
+{   yylval->node = g_symbolTable.GetSymbol(yytext)->Idnode;
 										return token::IDENTIFIER; }
 	YY_BREAK
 case 30:

@@ -48,12 +48,16 @@ compile_unit: statement							{ $$=g_root= new CCompileUnit($1);}
 			| compile_unit function_definition  { $$=g_root= new CCompileUnit($1,$2);}
 			;
 
-function_definition : FUNCTION IDENTIFIER '(' fargs ')' compound_statement { $$ = new CFunctionDefinition($2,$4,$6); }
-				|	  FUNCTION IDENTIFIER '('  ')' compound_statement  { $$ = new CFunctionDefinition($2,$5); }
+function_definition : FUNCTION IDENTIFIER '(' fargs ')' compound_statement { $$ = new CFunctionDefinition($2,$4,$6);
+																			g_symbolTable.GetSymbol(((CIDENTIFIER *)$2)->m_text)->syntaxNode =$$;
+																		   }
+				|	  FUNCTION IDENTIFIER '('  ')' compound_statement  { $$ = new CFunctionDefinition($2,$5);
+																		g_symbolTable.GetSymbol(((CIDENTIFIER *)$2)->m_text)->syntaxNode =$$;
+																	   }
 				;
 
 fargs :   IDENTIFIER		{ $$ = new CFormalArgs($1); }
-		| fargs IDENTIFIER  { $$ = new CFormalArgs($1,$2); }
+		| fargs ',' IDENTIFIER  { $$ = new CFormalArgs($1,$3); }
 		;
 
 statement : expression ';'			{ $$ = new CExpressionStatement($1) ;}
@@ -79,7 +83,9 @@ statement_list : statement					{ $$ = new CStatementList($1) ;}
 			   ;
 
 expression: NUMBER							{ $$ = $1; }
-		  | IDENTIFIER						{ $$ = $1; }
+		  | IDENTIFIER						{ $$ = new CExpressionVariable($1);
+											  g_symbolTable.GetSymbol(((CIDENTIFIER *)$1)->m_text)->syntaxNode =$$;
+											}
 		  | IDENTIFIER '(' ')'				{ $$ = new CExpressionFCall($1); }
 		  | IDENTIFIER '(' args ')'			{ $$ = new CExpressionFCall($1,$3); }
 		  | expression PLUS expression		{ $$ = new CExpressionAdd($1,$3); }

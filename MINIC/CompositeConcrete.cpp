@@ -1,11 +1,12 @@
 #include "CompositeConcrete.h"
-
+void MapActualToFormalArguments();
 CCompileUnit::CCompileUnit(CSTNode* arg1, CSTNode* arg2): CSTNode(NT_COMPILEUNIT,2,arg1,arg2) {}
 CCompileUnit::CCompileUnit(CSTNode* arg1) :CSTNode(NT_COMPILEUNIT,1,arg1) {}
 CFunctionDefinition::CFunctionDefinition(CSTNode* id, CSTNode* fargs, CSTNode* compoundst) :CSTNode(NT_FUNCTIONDEFINITION,3,id,fargs,compoundst){}
-CFunctionDefinition::CFunctionDefinition(CSTNode* id, CSTNode* compoundst):CSTNode(NT_FUNCTIONDEFINITION,2,id,compoundst) {}
+CFunctionDefinition::CFunctionDefinition(CSTNode* id, CSTNode* compoundst):CSTNode(NT_FUNCTIONDEFINITION,3,id,new CFormalArgs(),compoundst) {}
 CFormalArgs::CFormalArgs(CSTNode* fargs, CSTNode* id) :CSTNode(NT_FORMALARGS,2,fargs,id){}
 CFormalArgs::CFormalArgs(CSTNode* id):CSTNode(NT_FORMALARGS,1,id) {}
+CFormalArgs::CFormalArgs() :CSTNode(NT_FORMALARGS,0) {}
 CActualArgs::CActualArgs(CSTNode* actargs, CSTNode* expr) :CSTNode(NT_ACTUALARGS,2,actargs,expr) {}
 CActualArgs::CActualArgs(CSTNode* expr):CSTNode(NT_ACTUALARGS,1,expr) {}
 CStatement::CStatement(NodeType tp, int children, CSTNode* arg) :CSTNode(tp,children,arg){}
@@ -30,9 +31,13 @@ CExpressionNUMBER::CExpressionNUMBER(const char *text, double value) :CExpressio
 	m_value = value;
 	m_text = string(text);
 }
-CExpressionIDENTIFIER::CExpressionIDENTIFIER(const char *text) : CExpression(NT_EXPRESSION_IDENTIFIER) {
-	m_text = string(text);
+CExpressionVariable::CExpressionVariable(CSTNode *id) : CExpression(NT_EXPRESSION_VARIABLE) {
+	m_text = _strdup(((CIDENTIFIER*)id)->m_text.c_str());
 }
+CIDENTIFIER::CIDENTIFIER(const char* text) :CSTNode(NT_IDENTIFIER,0) {
+	m_text = _strdup(text);
+}
+CIDENTIFIER::~CIDENTIFIER() {}
 CExpressionFCall::CExpressionFCall(CSTNode* id, CSTNode* actual) : CExpression(NT_EXPRESSION_FCALL, 2, id,actual) {}
 CExpressionFCall::CExpressionFCall(CSTNode* id) : CExpression(NT_EXPRESSION_FCALL, 1, id) {}
 
@@ -107,7 +112,7 @@ void CExpressionNUMBER::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
 	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
 	CSTNode::PrintSyntaxTree(dotfile, this);
 }
-void CExpressionIDENTIFIER::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
+void CExpressionVariable::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
 	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
 	CSTNode::PrintSyntaxTree(dotfile, this);
 }
@@ -179,21 +184,27 @@ void CExpressionNEQUAL::PrintSyntaxTree(ofstream* dotfile,CSTNode *parent) {
 	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
 	CSTNode::PrintSyntaxTree(dotfile, this);
 }
-
-
-
+void CIDENTIFIER::PrintSyntaxTree(ofstream* dotfile, CSTNode* parent) {
+	(*dotfile) << "\"" << parent->GetGraphVizLabel() << "\"->\"" << GetGraphVizLabel() << "\";\n";
+	CSTNode::PrintSyntaxTree(dotfile, this);
+}
 
 double CExpressionNUMBER::Evaluate(CSTNode* parent) {
 	return m_value;
 }
-double CExpressionIDENTIFIER::Evaluate(CSTNode* parent) {
-	return m_value;
+double CExpressionVariable::Evaluate(CSTNode* parent) {
+	return g_symbolTable.GetSymbol(m_text)->value;
 }
+double CIDENTIFIER::Evaluate(CSTNode* parent) {
+	return 0;
+}
+
 double CExpressionAssign::Evaluate(CSTNode* parent) {
-	CExpressionIDENTIFIER *id = (CExpressionIDENTIFIER *)GetChild(0);
-	id->m_value = GetChild(1)->Evaluate(this);
-	cout << id->m_text << "=" << id->m_value << endl;
-	return id->m_value;
+	CExpressionVariable *id = (CExpressionVariable*)GetChild(0);
+	Symbol *s = g_symbolTable.GetSymbol(id->m_text);
+	s->value = GetChild(1)->Evaluate(this);
+	cout << s->m_text << "=" << s->value << endl;
+	return s->value;
 }
 
 double CExpressionAdd::Evaluate(CSTNode* parent) {
@@ -251,7 +262,6 @@ double CExpressionNOT::Evaluate(CSTNode* parent) {
 	return !(GetChild(0)->Evaluate(this)) ;
 }
 
-
 double CExpressionStatement::Evaluate(CSTNode* parent) {
 	CExpression* child= (CExpression*)GetChild(0);
 	double result = child->Evaluate(this);
@@ -285,45 +295,90 @@ double CBreakStatement::Evaluate(CSTNode* parent) {
 	return  0;
 }
 
-
-void GetArguments(CSTNode *currentnode,list<CExpression*>* arguments) {
-	static int discoveredArg=0;
-
+void GetFormalArguments(CSTNode* currentnode, list<CIDENTIFIER*>* arguments) {
 	list<CSTNode*>::iterator it;
 	double result = 0;
-			
-	if ( dynamic_cast<CExpression *>(currentnode)!=nullptr) {
-		arguments->push_back((CExpression *)currentnode);		
+
+	if (dynamic_cast<CIDENTIFIER*>(currentnode) != nullptr) {
+		arguments->push_back((CIDENTIFIER*)currentnode);
 	}
-	
+
 	for (it = currentnode->m_children->begin(); it != currentnode->m_children->end(); it++) {
-		GetArguments((*it), arguments);
+		GetFormalArguments((*it), arguments);
 	}
 }
 
-double CExpressionFCall::GetArgument(int index) {
+void CExpressionFCall::MapActualToFormalArguments() {
+	CIDENTIFIER* fid = (CIDENTIFIER*)GetChild(0);
+	CActualArgs* aArgs = (CActualArgs*)GetChild(1);
+	CFunctionDefinition* fundef = (CFunctionDefinition*)g_symbolTable.GetSymbol(fid->m_text)->syntaxNode;
+	CFormalArgs* fargs = (CFormalArgs*)fundef->GetChild(1);
+	list<CIDENTIFIER*>::iterator it;
+	list<CExpression*>::iterator ite;
+	m_actualArguments = new list<CExpression*>();
+	m_formalArguments = new list<CIDENTIFIER*>();
+	GetActualArguments(aArgs, m_actualArguments);
+	GetFormalArguments(fargs, m_formalArguments);
+	for ( it = m_formalArguments->begin(), ite=m_actualArguments->begin();
+		  it != m_formalArguments->end() ;it++,ite++) {
+		g_symbolTable.GetSymbol((*it)->m_text)->value = (*ite)->Evaluate(this);
+	}
+}
+
+void GetActualArguments(CSTNode* currentnode, list<CExpression*>* arguments) {
+	list<CSTNode*>::iterator it;
+	double result = 0;
+
+	if (dynamic_cast<CExpression*>(currentnode) != nullptr) {
+		arguments->push_back((CExpression*)currentnode);
+	}
+
+	for (it = currentnode->m_children->begin(); it != currentnode->m_children->end(); it++) {
+		GetActualArguments((*it), arguments);
+	}
+}
+double CExpressionFCall::GetActualArgument(int index) {
 	CActualArgs *aArgs = (CActualArgs*)GetChild(1);
 	list<CExpression*>::iterator it;
-	if ( m_arguments == nullptr) {
-		m_arguments = new list<CExpression*>();
-		GetArguments(aArgs,m_arguments);
+	if ( m_actualArguments == nullptr) {
+		m_actualArguments = new list<CExpression*>();
+		GetActualArguments(aArgs,m_actualArguments);
 	}
-	it = m_arguments->begin();
+	it = m_actualArguments->begin();
 	advance(it, index);
 	return (*it)->Evaluate(this);
 }
 
+double CReturnStatement::Evaluate(CSTNode* parent) {
+	//1.Mark the end of function
+	m_breakVisit = true;
+	m_returnedValue = GetChild(0)->Evaluate(this);
+	return m_returnedValue;
+}
 
 double CExpressionFCall::Evaluate(CSTNode* parent) {
 	double result = 0;
-	CExpressionIDENTIFIER* functionId = (CExpressionIDENTIFIER*)GetChild(0);
-
+	CIDENTIFIER* functionId = (CIDENTIFIER*)GetChild(0);
+	CFunctionDefinition* fundef;
+	
 	if ( !functionId->m_text.compare("sqrt") ) {
-		result = sqrt(GetArgument(0));
+		result = sqrt(GetActualArgument(0));
 	}
 	else if (!functionId->m_text.compare("pow")) {
-		result = pow(GetArgument(0), GetArgument(1));
+		result = pow(GetActualArgument(0), GetActualArgument(1));
+	}
+	else {
+		// 1. Get access to the function definition object
+		fundef = (CFunctionDefinition *)g_symbolTable.GetSymbol(functionId->m_text)->syntaxNode;
+		// Map actual to formal arguments 
+		MapActualToFormalArguments();
+		// Evaluate
+		fundef->GetChild(2)->Evaluate(this);
+		// Return value
+		result = m_returnedValue;
+		m_breakVisit = false;
 	}
 
 	return result;
 }
+double CFunctionDefinition::Evaluate(CSTNode* parent) { return 0; }
