@@ -12,6 +12,7 @@ extern FILE *yyin;
 %}
 %verbose
 %locations
+%debug
 
 %initial-action {
 // Filename for locations here

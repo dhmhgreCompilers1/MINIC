@@ -42,7 +42,7 @@
 
 /* "%code requires" blocks.  */
 /* Line 33 of lalr1.cc  */
-#line 23 "MINIC.y"
+#line 24 "MINIC.y"
 
 	#include "Composite.h"
 
@@ -58,7 +58,7 @@
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 0
+# define YYDEBUG 1
 #endif
 
 
@@ -75,7 +75,7 @@ namespace yy {
     union semantic_type
     {
 /* Line 33 of lalr1.cc  */
-#line 27 "MINIC.y"
+#line 28 "MINIC.y"
 
 	CSTNode *node;
 

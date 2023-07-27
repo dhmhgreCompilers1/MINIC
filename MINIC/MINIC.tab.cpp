@@ -341,7 +341,7 @@ namespace yy {
 
 /* User initialization code.  */
 /* Line 545 of lalr1.cc  */
-#line 16 "MINIC.y"
+#line 17 "MINIC.y"
 {
 // Filename for locations here
 yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
@@ -467,31 +467,31 @@ yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
       {
           case 2:
 /* Line 670 of lalr1.cc  */
-#line 45 "MINIC.y"
+#line 46 "MINIC.y"
     { (yyval.node)=g_root= new CCompileUnit((yysemantic_stack_[(1) - (1)].node));}
     break;
 
   case 3:
 /* Line 670 of lalr1.cc  */
-#line 46 "MINIC.y"
+#line 47 "MINIC.y"
     { (yyval.node)=g_root= new CCompileUnit((yysemantic_stack_[(2) - (1)].node),(yysemantic_stack_[(2) - (2)].node));}
     break;
 
   case 4:
 /* Line 670 of lalr1.cc  */
-#line 47 "MINIC.y"
+#line 48 "MINIC.y"
     { (yyval.node)=g_root= new CCompileUnit((yysemantic_stack_[(1) - (1)].node));}
     break;
 
   case 5:
 /* Line 670 of lalr1.cc  */
-#line 48 "MINIC.y"
+#line 49 "MINIC.y"
     { (yyval.node)=g_root= new CCompileUnit((yysemantic_stack_[(2) - (1)].node),(yysemantic_stack_[(2) - (2)].node));}
     break;
 
   case 6:
 /* Line 670 of lalr1.cc  */
-#line 51 "MINIC.y"
+#line 52 "MINIC.y"
     { (yyval.node) = new CFunctionDefinition((yysemantic_stack_[(6) - (2)].node),(yysemantic_stack_[(6) - (4)].node),(yysemantic_stack_[(6) - (6)].node));
 																			g_symbolTable.GetSymbol(((CIDENTIFIER *)(yysemantic_stack_[(6) - (2)].node))->m_text)->syntaxNode =(yyval.node);
 																		   }
@@ -499,7 +499,7 @@ yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
 
   case 7:
 /* Line 670 of lalr1.cc  */
-#line 54 "MINIC.y"
+#line 55 "MINIC.y"
     { (yyval.node) = new CFunctionDefinition((yysemantic_stack_[(5) - (2)].node),(yysemantic_stack_[(5) - (5)].node));
 																		g_symbolTable.GetSymbol(((CIDENTIFIER *)(yysemantic_stack_[(5) - (2)].node))->m_text)->syntaxNode =(yyval.node);
 																	   }
@@ -507,91 +507,91 @@ yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
 
   case 8:
 /* Line 670 of lalr1.cc  */
-#line 59 "MINIC.y"
+#line 60 "MINIC.y"
     { (yyval.node) = new CFormalArgs((yysemantic_stack_[(1) - (1)].node)); }
     break;
 
   case 9:
 /* Line 670 of lalr1.cc  */
-#line 60 "MINIC.y"
+#line 61 "MINIC.y"
     { (yyval.node) = new CFormalArgs((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 10:
 /* Line 670 of lalr1.cc  */
-#line 63 "MINIC.y"
+#line 64 "MINIC.y"
     { (yyval.node) = new CExpressionStatement((yysemantic_stack_[(2) - (1)].node)) ;}
     break;
 
   case 14:
 /* Line 670 of lalr1.cc  */
-#line 67 "MINIC.y"
+#line 68 "MINIC.y"
     { (yyval.node) = new CReturnStatement((yysemantic_stack_[(3) - (2)].node)) ;}
     break;
 
   case 15:
 /* Line 670 of lalr1.cc  */
-#line 68 "MINIC.y"
+#line 69 "MINIC.y"
     { (yyval.node) = new CBreakStatement() ;}
     break;
 
   case 16:
 /* Line 670 of lalr1.cc  */
-#line 69 "MINIC.y"
+#line 70 "MINIC.y"
     { (yyval.node) = new CNullStatement() ;}
     break;
 
   case 17:
 /* Line 670 of lalr1.cc  */
-#line 71 "MINIC.y"
+#line 72 "MINIC.y"
     { (yyval.node) = new CIfStatement((yysemantic_stack_[(5) - (3)].node),(yysemantic_stack_[(5) - (5)].node)) ;}
     break;
 
   case 18:
 /* Line 670 of lalr1.cc  */
-#line 72 "MINIC.y"
+#line 73 "MINIC.y"
     { (yyval.node) = new CIfStatement((yysemantic_stack_[(7) - (3)].node),(yysemantic_stack_[(7) - (5)].node),(yysemantic_stack_[(7) - (7)].node)) ;}
     break;
 
   case 19:
 /* Line 670 of lalr1.cc  */
-#line 75 "MINIC.y"
+#line 76 "MINIC.y"
     { (yyval.node) = new CWhileStatement((yysemantic_stack_[(5) - (3)].node),(yysemantic_stack_[(5) - (5)].node)) ;}
     break;
 
   case 20:
 /* Line 670 of lalr1.cc  */
-#line 78 "MINIC.y"
+#line 79 "MINIC.y"
     { (yyval.node) = new CCompoundStatement() ;}
     break;
 
   case 21:
 /* Line 670 of lalr1.cc  */
-#line 79 "MINIC.y"
+#line 80 "MINIC.y"
     { (yyval.node) = new CCompoundStatement((yysemantic_stack_[(3) - (2)].node)) ;}
     break;
 
   case 22:
 /* Line 670 of lalr1.cc  */
-#line 81 "MINIC.y"
+#line 82 "MINIC.y"
     { (yyval.node) = new CStatementList((yysemantic_stack_[(1) - (1)].node)) ;}
     break;
 
   case 23:
 /* Line 670 of lalr1.cc  */
-#line 82 "MINIC.y"
+#line 83 "MINIC.y"
     { (yyval.node) = new CStatementList((yysemantic_stack_[(2) - (1)].node),(yysemantic_stack_[(2) - (2)].node)) ;}
     break;
 
   case 24:
 /* Line 670 of lalr1.cc  */
-#line 85 "MINIC.y"
+#line 86 "MINIC.y"
     { (yyval.node) = (yysemantic_stack_[(1) - (1)].node); }
     break;
 
   case 25:
 /* Line 670 of lalr1.cc  */
-#line 86 "MINIC.y"
+#line 87 "MINIC.y"
     { (yyval.node) = new CExpressionVariable((yysemantic_stack_[(1) - (1)].node));
 											  g_symbolTable.GetSymbol(((CIDENTIFIER *)(yysemantic_stack_[(1) - (1)].node))->m_text)->syntaxNode =(yyval.node);
 											}
@@ -599,127 +599,127 @@ yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
 
   case 26:
 /* Line 670 of lalr1.cc  */
-#line 89 "MINIC.y"
+#line 90 "MINIC.y"
     { (yyval.node) = new CExpressionFCall((yysemantic_stack_[(3) - (1)].node)); }
     break;
 
   case 27:
 /* Line 670 of lalr1.cc  */
-#line 90 "MINIC.y"
+#line 91 "MINIC.y"
     { (yyval.node) = new CExpressionFCall((yysemantic_stack_[(4) - (1)].node),(yysemantic_stack_[(4) - (3)].node)); }
     break;
 
   case 28:
 /* Line 670 of lalr1.cc  */
-#line 91 "MINIC.y"
+#line 92 "MINIC.y"
     { (yyval.node) = new CExpressionAdd((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 29:
 /* Line 670 of lalr1.cc  */
-#line 92 "MINIC.y"
+#line 93 "MINIC.y"
     { (yyval.node) = new CExpressionMinus((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 30:
 /* Line 670 of lalr1.cc  */
-#line 93 "MINIC.y"
+#line 94 "MINIC.y"
     { (yyval.node) = new CExpressionMult((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 31:
 /* Line 670 of lalr1.cc  */
-#line 94 "MINIC.y"
+#line 95 "MINIC.y"
     { (yyval.node) = new CExpressionDiv((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 32:
 /* Line 670 of lalr1.cc  */
-#line 95 "MINIC.y"
+#line 96 "MINIC.y"
     { (yyval.node) = new CExpressionUnaryPlus((yysemantic_stack_[(2) - (2)].node)); }
     break;
 
   case 33:
 /* Line 670 of lalr1.cc  */
-#line 96 "MINIC.y"
+#line 97 "MINIC.y"
     { (yyval.node) = new CExpressionUnaryMinus((yysemantic_stack_[(2) - (2)].node)); }
     break;
 
   case 34:
 /* Line 670 of lalr1.cc  */
-#line 97 "MINIC.y"
+#line 98 "MINIC.y"
     { (yyval.node) = (yysemantic_stack_[(3) - (2)].node);}
     break;
 
   case 35:
 /* Line 670 of lalr1.cc  */
-#line 98 "MINIC.y"
+#line 99 "MINIC.y"
     { (yyval.node) = new CExpressionAssign((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 36:
 /* Line 670 of lalr1.cc  */
-#line 99 "MINIC.y"
+#line 100 "MINIC.y"
     { (yyval.node) = new CExpressionAND((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 37:
 /* Line 670 of lalr1.cc  */
-#line 100 "MINIC.y"
+#line 101 "MINIC.y"
     { (yyval.node) = new CExpressionOR((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 38:
 /* Line 670 of lalr1.cc  */
-#line 101 "MINIC.y"
+#line 102 "MINIC.y"
     { (yyval.node) = new CExpressionNOT((yysemantic_stack_[(2) - (2)].node)); }
     break;
 
   case 39:
 /* Line 670 of lalr1.cc  */
-#line 102 "MINIC.y"
+#line 103 "MINIC.y"
     { (yyval.node) = new CExpressionGT((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 40:
 /* Line 670 of lalr1.cc  */
-#line 103 "MINIC.y"
+#line 104 "MINIC.y"
     { (yyval.node) = new CExpressionGTE((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 41:
 /* Line 670 of lalr1.cc  */
-#line 104 "MINIC.y"
+#line 105 "MINIC.y"
     { (yyval.node) = new CExpressionLT((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 42:
 /* Line 670 of lalr1.cc  */
-#line 105 "MINIC.y"
+#line 106 "MINIC.y"
     { (yyval.node) = new CExpressionLTE((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 43:
 /* Line 670 of lalr1.cc  */
-#line 106 "MINIC.y"
+#line 107 "MINIC.y"
     { (yyval.node) = new CExpressionEQUAL((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 44:
 /* Line 670 of lalr1.cc  */
-#line 107 "MINIC.y"
+#line 108 "MINIC.y"
     { (yyval.node) = new CExpressionNEQUAL((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
   case 45:
 /* Line 670 of lalr1.cc  */
-#line 110 "MINIC.y"
+#line 111 "MINIC.y"
     { (yyval.node) = new CActualArgs((yysemantic_stack_[(1) - (1)].node)); }
     break;
 
   case 46:
 /* Line 670 of lalr1.cc  */
-#line 111 "MINIC.y"
+#line 112 "MINIC.y"
     { (yyval.node) = new CActualArgs((yysemantic_stack_[(3) - (1)].node),(yysemantic_stack_[(3) - (3)].node)); }
     break;
 
@@ -1255,11 +1255,11 @@ yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
   const unsigned char
   parser::yyrline_[] =
   {
-         0,    45,    45,    46,    47,    48,    51,    54,    59,    60,
-      63,    64,    65,    66,    67,    68,    69,    71,    72,    75,
-      78,    79,    81,    82,    85,    86,    89,    90,    91,    92,
-      93,    94,    95,    96,    97,    98,    99,   100,   101,   102,
-     103,   104,   105,   106,   107,   110,   111
+         0,    46,    46,    47,    48,    49,    52,    55,    60,    61,
+      64,    65,    66,    67,    68,    69,    70,    72,    73,    76,
+      79,    80,    82,    83,    86,    87,    90,    91,    92,    93,
+      94,    95,    96,    97,    98,    99,   100,   101,   102,   103,
+     104,   105,   106,   107,   108,   111,   112
   };
 
   // Print the state stack on the debug stream.
@@ -1351,7 +1351,7 @@ yylloc.begin.filename = yylloc.end.filename = new std::string("test.txt");
 /* Line 1141 of lalr1.cc  */
 #line 1353 "MINIC.tab.cpp"
 /* Line 1142 of lalr1.cc  */
-#line 113 "MINIC.y"
+#line 114 "MINIC.y"
 
 
 namespace yy{
